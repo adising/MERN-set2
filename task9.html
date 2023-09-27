@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript - Task 3</title>
+</head>
+<body>
+    <h1>Multiplication and Division Calculator</h1>
+    
+    <p>Enter two numbers:</p>
+    <input type="number" id="num1" placeholder="Enter the first number">
+    <input type="number" id="num2" placeholder="Enter the second number">
+    <button onclick="calculate()">Calculate</button>
+
+    <p>Result:</p>
+    <div id="result"></div>
+
+    <script>
+        function calculate() {
+            
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            if (!isNaN(num1) && !isNaN(num2)) {
+                const multiplicationResult = num1 * num2;
+                const divisionResult = num1 / num2;
+
+                document.getElementById("result").innerHTML = `
+                    Multiplication: ${multiplicationResult}<br>
+                    Division: ${divisionResult}
+                `;
+            } 
+            
+            else {
+                document.getElementById("result").innerHTML = "Please enter valid numbers.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5</title>
+    <style>
+        table,
+        th,
+        td {
+            border: none;
+        }
+
+        .col1{
+            width: 200px; 
+            text-align: right; 
+            padding-right: 3%;
+        }
+
+        .col2{
+            width: 1000px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h3 {
+            color: blue;
+            padding-top: 2%;
+        }
+
+        table {
+            
+            padding: 20px;
+        }
+
+        .poor, .password-mismatch {
+            color: red;
+        }
+
+        .perfect, .password-match {
+            color: green;
+        }
+
+        span{
+            color: red;
+        }
+
+        input{
+            width: 80%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <center>
+
+        <form style="background: linear-gradient(to bottom, #eceb7f, #d81edf); width: 50%">
+
+            <table>
+                <h3>Registration Form</h3>
+                <tr>
+                    <td class="col1"><label for="fname">First Name</label> </td>
+                    <td class="col2"><input type="text" id="fname" name="fname" required onkeyup="checkFieldStrength('fname')">
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label for="lname">Last Name</label> </td>
+                    <td class="col2"><input type="text" id="lname" name="lname" onkeyup="checkFieldStrength('lname')" required>
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label for="mail">Email</label></td>
+                    <td class="col2"><input type="email" id="mail" name="mail" onkeyup="checkFieldStrength('mail')">
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label for="pass">Password</label></td>
+                    <td class="col2"><input type="password" id="pass" name="pass" maxlength="12"  onkeyup="checkFieldStrength('pass')" required>
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label for="repass">Re-enter Password</label></td>
+                    <td class="col2"><input type="password" id="repass" name="repass" maxlength="12" onkeyup="checkPasswordMatch()" required>
+                    <span class="password-match-indicator">MISMATCH</span>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label>Gender: </label></td>
+                    <td>
+                        <input type="radio" name="gender" style="width: 15%" />Male
+                        <br>
+                        <input type="radio" name="gender" style="width: 15%" />Female
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label for="age">Age: </label></td>
+                    <td class="col2"><input type="number" id="age" name="age" min="0" max="99" required>
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label>Address</label></td>
+                    <td class="col2"><textarea style="width: 81%; height: 100px" id="addr" onkeyup="checkFieldStrength('addr')" required></textarea>
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label for="state"></label>State</td>
+                    <td class="col2"><input type="state" id="state" name="state" onkeyup="checkFieldStrength('state')" required>
+                    <span class="strength-indicator">POOR</span></td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label>Country</label></td>
+                    <td class="col2">
+                        <select>
+                            <option>Choose your country</option>
+                            <option>India</option>
+                            <option>Singapore</option>
+                            <option>Nepal</option>
+                            <option>Sri Lanka</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col1"><label>Languages known</label></td>
+                    <td class="col2">
+                        <input  style="width: 5%" type="checkbox" />English
+                        <input  style="width: 5%" type="checkbox" />Kannada
+                        <input  style="width: 5%" type="checkbox" />Hindi
+                        <input  style="width: 5%" type="checkbox" />Telugu
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input  style="width: 10%" type="checkbox" checked /> Hereby I declare all the given details are true
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="right" colspan="2">Login to <a href="https://ethnus.com/"
+                            style="color: purple;">Ethnus</a> website</td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="Register" align="center" style="margin-bottom: 2%; width: 15%;" />
+        </form>
+    </center>
+
+    <script>
+        function checkFieldStrength(fieldId) {
+            const field = document.getElementById(fieldId);
+            const fieldStrengthIndicator = field.parentNode.querySelector('.strength-indicator');
+
+            // Reset classes and content
+            fieldStrengthIndicator.className = "strength-indicator";
+            fieldStrengthIndicator.textContent = "";
+
+            // Check field value length and set strength indicator
+            if (field.value.length < 3) {
+                fieldStrengthIndicator.textContent = "POOR";
+                fieldStrengthIndicator.classList.add("poor");
+            } else {
+                fieldStrengthIndicator.textContent = "Perfect";
+                fieldStrengthIndicator.classList.add("perfect");
+            }
+        }
+
+        function checkPasswordMatch() {
+            const passField = document.getElementById("pass");
+            const repassField = document.getElementById("repass");
+            const passwordMatchIndicator = repassField.parentNode.querySelector('.password-match-indicator');
+
+            // Reset classes and content
+            passwordMatchIndicator.className = "password-match-indicator";
+            passwordMatchIndicator.textContent = "";
+
+            // Check if passwords match and set match indicator
+            if (passField.value === repassField.value) {
+                passwordMatchIndicator.textContent = "MATCH";
+                passwordMatchIndicator.classList.add("password-match");
+            } else {
+                passwordMatchIndicator.textContent = "MISMATCH";
+                passwordMatchIndicator.classList.add("password-mismatch");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
